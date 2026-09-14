@@ -2,6 +2,7 @@ import express from "express"
 import pool from "./db.js"
 import cors from "cors"
 import bcrypt from "bcrypt"
+import jwt from jwt
 
 const app = express();
 
@@ -32,6 +33,13 @@ app.post("/api/v1/register", async (req, res) => {
 app.post("/api/v1/login", async (req, res) => {
   let connection;
   const { email, password } = req.body;
+  const secret_key = process.env.JWT_SECRET || 'Set environment variable for JWT_SECRET';
+  
+  if (secret_key == 'Set environment variable for JWT_SECRET') {
+    console.log('Set environment variable for JWT_SECRET');
+    res.status(500).json({ message: 'Invalid credentials in server environment' });
+    return;
+  }
 
   try {
     connection = await pool.getConnection();
@@ -42,7 +50,8 @@ app.post("/api/v1/login", async (req, res) => {
     const isMatch = await bcrypt.compare(password, hash);
     if (!isMatch) return res.status(400).json({ error: "Wrong email or password" });
 
-    res.status(200).json({ message: "Login successful" });
+    const token = jwt.sign(user[0].id, secret_key);
+    res.status(200).json({ message: "Login successful", token: token });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal server error" });
