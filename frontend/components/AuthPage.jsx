@@ -1,13 +1,6 @@
 'use client';
 import { useState, useRef, useEffect } from "react";
 
-/**
- * Meridian — dashboard sign-in screen
- * Split layout: an ink-dark brief on the left, the sign-in form on the right.
- * Palette, type and motion are intentionally scoped to a "control room" feel —
- * calm, precise, legible under pressure.
- */
-
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export default function AuthPage({ onSubmit } = {}) {
@@ -57,8 +50,7 @@ export default function AuthPage({ onSubmit } = {}) {
   return (
     <div className="mrd-root">
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap');
-
+        @import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap');
         .mrd-root {
           --ink: #14181F;
           --ink-2: #1B212B;
@@ -71,6 +63,9 @@ export default function AuthPage({ onSubmit } = {}) {
           --slate-light: #8891A0;
           --cream: #F2EFE7;
           --error: #A6412B;
+          --red: #c20606;
+          --yellow: #f5c518;
+          --yellow-dark: #e6b800;
 
           min-height: 100vh;
           width: 100%;
@@ -84,7 +79,7 @@ export default function AuthPage({ onSubmit } = {}) {
           position: relative;
           flex: 1 1 46%;
           min-height: 100vh;
-          background: linear-gradient(165deg, var(--ink) 0%, var(--ink-2) 100%);
+          background: var(--red);
           color: var(--cream);
           display: flex;
           flex-direction: column;
@@ -107,12 +102,12 @@ export default function AuthPage({ onSubmit } = {}) {
         .mrd-mark-dot {
           width: 8px;
           height: 8px;
-          background: var(--brass);
+          background: var(--yellow);
           flex: none;
         }
 
         .mrd-headline {
-          font-family: 'Fraunces', Georgia, serif;
+          font-family: 'Unbounded', Georgia, serif;
           font-weight: 400;
           font-size: clamp(1.9rem, 3vw, 2.6rem);
           line-height: 1.22;
@@ -162,7 +157,7 @@ export default function AuthPage({ onSubmit } = {}) {
         }
 
         .mrd-title {
-          font-family: 'Fraunces', Georgia, serif;
+          font-family: 'Unbounded', Georgia, serif;
           font-weight: 400;
           font-size: 2rem;
           letter-spacing: -0.01em;
@@ -191,7 +186,7 @@ export default function AuthPage({ onSubmit } = {}) {
         }
 
         .mrd-input-row:focus-within {
-          border-color: var(--brass);
+          border-color: var(--yellow);
         }
 
         .mrd-input-row.has-error {
@@ -230,7 +225,7 @@ export default function AuthPage({ onSubmit } = {}) {
 
         .mrd-toggle:focus-visible,
         .mrd-input:focus-visible {
-          outline: 2px solid var(--brass);
+          outline: 2px solid var(--yellow);
           outline-offset: 2px;
         }
 
@@ -259,7 +254,7 @@ export default function AuthPage({ onSubmit } = {}) {
         .mrd-checkbox {
           width: 15px;
           height: 15px;
-          accent-color: var(--brass);
+          accent-color: var(--yellow);
           cursor: pointer;
         }
 
@@ -282,7 +277,7 @@ export default function AuthPage({ onSubmit } = {}) {
         .mrd-submit {
           width: 100%;
           padding: 0.8rem 1rem;
-          background: var(--brass);
+          background: var(--yellow);
           color: var(--ink);
           border: none;
           font-family: 'IBM Plex Sans', sans-serif;
@@ -293,7 +288,7 @@ export default function AuthPage({ onSubmit } = {}) {
         }
 
         .mrd-submit:hover:not(:disabled) {
-          background: var(--brass-dark);
+          background: var(--yellow-dark);
         }
 
         .mrd-submit:disabled {
