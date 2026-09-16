@@ -1,6 +1,8 @@
 'use client';
+import Image from 'next/image';
 import { useState, useRef, useEffect } from "react";
 import "../css/AuthPage.css";
+import logo from "../images/meunier.png"
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -55,6 +57,7 @@ export default function AuthPage({ onSubmit } = {}) {
           <p className="mrd-headline">MeunierBoard</p>
           <svg className="mrd-spark" viewBox="0 0 360 110" aria-hidden="true">
           </svg>
+          <Image className="mrd-logo" src={logo} alt="MeunierBoard" />
         </div>
       </aside>
 

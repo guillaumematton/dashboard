@@ -167,6 +167,14 @@
     white-space: nowrap;
 }
 
+.mrd-logo {
+    position: absolute;
+    top: 15rem;
+    right: 1.5rem;
+    width: 400px;
+    height: auto;
+}
+
 .mrd-toggle:hover {
     color: var(--ink);
 }
