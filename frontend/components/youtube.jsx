@@ -1,4 +1,4 @@
-import YouTubePlayer from './YouTubePlayer';
+import YouTubePlayer from "./YoutubePlayer";
 
 // Simple in-memory cache (resets on server restart)
 let cache = { videoId: null, timestamp: 0 };
