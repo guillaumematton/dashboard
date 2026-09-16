@@ -2,7 +2,7 @@ import express from "express"
 import pool from "./db.js"
 import cors from "cors"
 import bcrypt from "bcrypt"
-import jwt from jwt
+import jwt from "jsonwebtoken"
 
 const app = express();
 
