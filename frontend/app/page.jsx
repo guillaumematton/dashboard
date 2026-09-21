@@ -1,6 +1,6 @@
 'use client';
-import AuthPage from '../components/AuthPage.jsx';
-import Register from '../components/Register.jsx';
+import AuthPage from './login/page.jsx';
+import Register from './register/page.jsx';
 
 export default function Page() {
   return <AuthPage />;

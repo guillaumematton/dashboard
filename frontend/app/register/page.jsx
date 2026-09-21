@@ -1,16 +1,16 @@
 'use client';
 import Image from 'next/image';
 import { useState, useRef, useEffect } from "react";
-import "../css/AuthPage.css";
-import logo from "../images/meunier.png"
+import "../../css/register.css";
+import logo from "../../images/meunier.png"
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-export default function AuthPage({ onSubmit } = {}) {
+export default function Register({ onSubmit } = {}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [remember, setRemember] = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [touched, setTouched] = useState({});
   const [status, setStatus] = useState("idle"); // idle | submitting | error | success
   const [errorMessage, setErrorMessage] = useState("");
@@ -46,7 +46,7 @@ export default function AuthPage({ onSubmit } = {}) {
       }
     } catch (err) {
       setStatus("error");
-      setErrorMessage(err?.message || "Couldn't sign you in. Check your details and try again.");
+      setErrorMessage(err?.message || "Couldn't register you in. Check your details and try again.");
     }
   }
 
@@ -63,7 +63,7 @@ export default function AuthPage({ onSubmit } = {}) {
 
       <main className="mrd-panel">
         <form className="mrd-form-wrap" onSubmit={handleSubmit} noValidate>
-          <h1 className="mrd-title">Sign in</h1>
+          <h1 className="mrd-title">Register</h1>
 
           {status === "error" && (
             <p className="mrd-banner" role="alert">
@@ -72,7 +72,7 @@ export default function AuthPage({ onSubmit } = {}) {
           )}
           {status === "success" && (
             <p className="mrd-banner success" role="status">
-              Signed in. Taking you to your dashboard…
+              Registration successful. Taking you to your dashboard…
             </p>
           )}
 
@@ -135,23 +135,32 @@ export default function AuthPage({ onSubmit } = {}) {
             )}
           </div>
 
-          <div className="mrd-row-between">
-            <label className="mrd-remember">
-              <input
-                type="checkbox"
-                className="mrd-checkbox"
-                checked={remember}
-                onChange={(e) => setRemember(e.target.checked)}
-              />
-              Stay signed in
+          <div className="mrd-field">
+            <label className="mrd-label" htmlFor="mrd-confirm-password">
+              Confirm Password
             </label>
-            <button type="button" className="mrd-link">
-              Forgot password?
-            </button>
+            <div className={`mrd-input-row ${passwordError ? "has-error" : ""}`}>
+              <input
+                id="mrd-confirm-password"
+                className="mrd-input"
+                type={showPassword ? "text" : "password"}
+                autoComplete="new-password"
+                placeholder="••••••••"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                onBlur={() => setTouched((t) => ({ ...t, confirmPassword: true }))}
+                aria-invalid={!!passwordError}
+                aria-describedby={passwordError ? "mrd-confirm-password-error" : undefined}
+              />
+            </div>
+            {passwordError && (
+              <p className="mrd-error-text" id="mrd-confirm-password-error">
+                {passwordError}
+              </p>
+            )}
           </div>
-
           <button type="submit" className="mrd-submit" disabled={!canSubmit}>
-            {status === "submitting" ? "Signing in…" : "Sign in"}
+            {status === "submitting" ? "Registering…" : "Register"}
           </button>
         </form>
       </main>
