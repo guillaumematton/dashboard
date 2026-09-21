@@ -102,6 +102,12 @@ export default function Register({ onSubmit } = {}) {
             )}
           </div>
 
+          <div className="mrd-row-between">
+            <button className="mrd-link" onClick={() => window.location.href = '/login'}>
+              Already have an account? Sign in
+            </button>
+          </div>
+
           <div className="mrd-field">
             <label className="mrd-label" htmlFor="mrd-password">
               Password
