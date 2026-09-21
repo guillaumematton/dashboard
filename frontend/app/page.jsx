@@ -78,19 +78,16 @@ export default function Dashboard() {
 
   return (
     <div className="dashboard">
-      <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: 16 }}>
-        <button className="btn" onClick={handleLogin}>
-          Login
-        </button>
-        <button className="btn" onClick={handleRegister}>
-          Register
-        </button>
+      <div className="dashboard-banner">
+      <div className="dashboard-header">
+        <img src="/meunier.png" alt="Logo" className="dashboard-logo" />
+        <div className="dashboard-actions">
+          <button className="btn" onClick={handleLogin}>Login</button>
+          <button className="btn" onClick={handleRegister}>Register</button>
+          <button className="btn" onClick={resetLayout}>⟳</button>
+        </div>
       </div>
-      <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: 8 }}>
-        <button className="widget__btn" onClick={resetLayout}>
-          ⟳
-        </button>
-      </div>
+    </div>
 
       {mounted && (
         <div ref={containerRef}>
