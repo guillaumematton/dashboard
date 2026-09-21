@@ -68,10 +68,26 @@ export default function Dashboard() {
     setVisible(Object.keys(registry));
   }, []);
 
+  const handleLogin = () => {
+    window.location.href = "/login";
+  }
+
+  const handleRegister = () => {
+    window.location.href = "/register";
+  }
+
   return (
     <div className="dashboard">
+      <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: 16 }}>
+        <button className="btn" onClick={handleLogin}>
+          Login
+        </button>
+        <button className="btn" onClick={handleRegister}>
+          Register
+        </button>
+      </div>
       <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: 8 }}>
-        <button className="widget__btn" onClick={resetLayout} title="Reset layout">
+        <button className="widget__btn" onClick={resetLayout}>
           ⟳
         </button>
       </div>
