@@ -1,0 +1,113 @@
+:root {
+  --bg: #0b0d12;
+  --card: rgba(255, 255, 255, 0.04);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --card-hover: rgba(255, 255, 255, 0.06);
+  --text: #e6e8ee;
+  --text-muted: #8b93a7;
+  --accent: #6ea8fe;
+  --row-height: 80px;   /* matches the compact rows in the image */
+  --gap: 16px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Inter", -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(1200px 600px at 80% -10%, rgba(110, 168, 254, 0.10), transparent 60%),
+    radial-gradient(900px 500px at 10% 110%, rgba(180, 120, 255, 0.08), transparent 55%),
+    var(--bg);
+  min-height: 100vh;
+}
+
+.dashboard {
+  padding: var(--gap);
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+/* ---- Widget card (the glass panel) ---- */
+.widget {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.widget:hover {
+  background: var(--card-hover);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.widget__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  cursor: grab;                 /* drag handle */
+  user-select: none;
+}
+.widget__header:active { cursor: grabbing; }
+
+.widget__title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  color: var(--text);
+}
+
+.widget__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px currentColor;
+}
+
+.widget__actions { display: flex; gap: 6px; }
+
+.widget__btn {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 14px;
+}
+.widget__btn:hover { background: rgba(255,255,255,0.08); color: var(--text); }
+
+.widget__body {
+  flex: 1;
+  padding: 4px 14px 14px;
+  overflow: auto;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* react-grid-layout placeholder (ghost while dragging) */
+.react-grid-item.react-grid-placeholder {
+  background: rgba(110, 168, 254, 0.15) !important;
+  border: 1px dashed var(--accent);
+  border-radius: 14px;
+  opacity: 1;
+}
+
+/* keep resize handles subtle */
+.react-resizable-handle { z-index: 1; }   
