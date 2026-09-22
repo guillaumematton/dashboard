@@ -5,7 +5,7 @@ import { useContainerWidth } from "react-grid-layout";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
 import Widget from "../components/widget";
-import "./dashboard.css";
+import "../css/dashboard.css";
 
 const STORAGE_KEY = "dashboard-layout-v1";
 
@@ -76,6 +76,35 @@ export default function Dashboard() {
     window.location.href = "/register";
   }
 
+  const [weatherSubscribe, setWeatherSubscribe] = useState(() => {
+    const stored = localStorage.getItem('weather');
+    return stored ? JSON.parse(stored) : false;
+  });
+  const [clockSubscribe, setClockSubscribe] = useState(() => {
+    const stored = localStorage.getItem('clock');
+    return stored ? JSON.parse(stored) : false;
+  });;
+  const [youtubeSubscribe, setYoutubeSubscribe] = useState(() => {
+    const stored = localStorage.getItem('youtbue');
+    return stored ? JSON.parse(stored) : null;
+  });;
+  const [githubSubscribe, setGithubSubscribe] = useState(() => {
+    const stored = localStorage.getItem('github');
+    return stored ? JSON.parse(stored) : false;
+  });;
+
+  useEffect(() => {
+    localStorage.setItem('weather', JSON.stringify(weatherSubscribe));
+    localStorage.setItem('clock', JSON.stringify(clockSubscribe));
+    localStorage.setItem('youtbe', JSON.stringify(youtubeSubscribe));
+    localStorage.setItem('github', JSON.stringify(githubSubscribe));
+    }, [weatherSubscribe, clockSubscribe]);
+
+  const options = [["Weather", () => { setWeatherSubscribe(true) }], ["Clock", () => { setClockSubscribe(true) }], ["Youtube", () => { setYoutubeSubscribe("hello") }], ["Github", () => { setGithubSubscribe("hello") }]];
+
+  const [subscribeOpen, setsubscribeOpen] = useState(false);
+  
+
   return (
     <div className="dashboard">
       <div className="dashboard-banner">
@@ -84,10 +113,13 @@ export default function Dashboard() {
         <div className="dashboard-actions">
           <button className="btn" onClick={handleLogin}>Login</button>
           <button className="btn" onClick={handleRegister}>Register</button>
-          <button className="btn" onClick={resetLayout}>⟳</button>
         </div>
       </div>
-    </div>
+      </div>
+
+      <div className="subscribe">
+        <button className="btn" onClick={() => setsubscribeOpen(true)}>Subscribe</button>
+      </div>
 
       {mounted && (
         <div ref={containerRef}>
@@ -98,7 +130,7 @@ export default function Dashboard() {
             rowHeight={80}
             margin={[16, 16]}
             containerPadding={[0, 0]}
-            draggableHandle=".widget__header"   // only the title bar drags
+            draggableHandle=".widget__header"
             onLayoutChange={handleLayoutChange}
             width={width}
           >
@@ -117,6 +149,20 @@ export default function Dashboard() {
               ))}
           </ReactGridLayout>
         </div>
+      )}
+
+      {/*handle subscribe button*/}
+      {subscribeOpen && (
+        <div className="overlay">
+          <div className="popup">
+            <button className="popup-close" onClick={() => setsubscribeOpen(false)}>×</button>
+              {options.map((opt) => (
+                <button className="popup-btn" onClick={() => { opt[1] }} key={opt[0]}>
+                  {opt[0]}
+                </button>
+              ))}
+            </div>
+          </div>
       )}
     </div>
   );
