@@ -1,0 +1,300 @@
+@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap');
+.mrd-root {
+    --ink: #14181F;
+    --ink-2: #1B212B;
+    --ink-line: rgba(247, 245, 240, 0.14);
+    --paper: #F7F5F0;
+    --paper-line: #E1DACB;
+    --brass: #B08D57;
+    --brass-dark: #8F7040;
+    --slate: #565F6B;
+    --slate-light: #8891A0;
+    --cream: #F2EFE7;
+    --error: #A6412B;
+    --red: #c20606;
+    --yellow: #f5c518;
+    --yellow-dark: #e6b800;
+
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    background: var(--paper);
+    font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--ink);
+}
+
+.mrd-brief {
+    position: relative;
+    flex: 1 1 46%;
+    min-height: 100vh;
+    background: var(--red);
+    color: var(--cream);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 3rem 3.25rem;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.mrd-mark {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+}
+
+.mrd-mark-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--yellow);
+    flex: none;
+}
+
+.mrd-headline {
+    font-family: 'Unbounded', Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(1.9rem, 3vw, 2.6rem);
+    line-height: 1.22;
+    letter-spacing: -0.01em;
+    max-width: 15ch;
+    margin: 2.5rem 0 2rem;
+}
+
+.mrd-spark {
+    width: 100%;
+    max-width: 360px;
+}
+
+.mrd-footline {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-top: 1px solid var(--ink-line);
+    padding-top: 1rem;
+    font-size: 0.8rem;
+    color: var(--slate-light);
+}
+
+.mrd-footline .num {
+    font-variant-numeric: tabular-nums;
+    color: var(--cream);
+}
+
+.mrd-panel {
+    flex: 1 1 54%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2.5rem;
+    box-sizing: border-box;
+}
+
+.mrd-form-wrap {
+    width: 100%;
+    max-width: 360px;
+}
+
+.mrd-eyebrow {
+    font-size: 0.8rem;
+    color: var(--slate);
+    margin: 0 0 0.4rem;
+}
+
+.mrd-title {
+    font-family: 'Unbounded', Georgia, serif;
+    font-weight: 400;
+    font-size: 2rem;
+    letter-spacing: -0.01em;
+    margin: 0 0 1.75rem;
+}
+
+.mrd-field {
+    margin-bottom: 1.25rem;
+}
+
+.mrd-label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 0.4rem;
+}
+
+.mrd-input-row {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--paper-line);
+    background: #fff;
+    transition: border-color 0.15s ease;
+}
+
+.mrd-input-row:focus-within {
+    border-color: var(--yellow);
+}
+
+.mrd-input-row.has-error {
+    border-color: var(--error);
+}
+
+.mrd-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    padding: 0.7rem 0.85rem;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.95rem;
+    color: var(--ink);
+}
+
+.mrd-input::placeholder {
+    color: var(--slate-light);
+}
+
+.mrd-toggle {
+    background: none;
+    border: none;
+    padding: 0 0.85rem;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--slate);
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.mrd-logo {
+    position: absolute;
+    top: 15rem;
+    right: 1.5rem;
+    width: auto;
+    height: auto;
+}
+
+.mrd-toggle:hover {
+    color: var(--ink);
+}
+
+.mrd-toggle:focus-visible,
+.mrd-input:focus-visible {
+    outline: 2px solid var(--yellow);
+    outline-offset: 2px;
+}
+
+.mrd-error-text {
+    margin: 0.4rem 0 0;
+    font-size: 0.8rem;
+    color: var(--error);
+}
+
+.mrd-row-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0.25rem 0 1.75rem;
+    font-size: 0.85rem;
+}
+
+.mrd-remember {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--slate);
+    cursor: pointer;
+}
+
+.mrd-checkbox {
+    width: 15px;
+    height: 15px;
+    accent-color: var(--yellow);
+    cursor: pointer;
+}
+
+.mrd-link {
+    color: var(--slate);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    background: none;
+    border: none;
+    font-size: 0.85rem;
+    cursor: pointer;
+    padding: 0;
+    font-family: inherit;
+    gap: 0.25rem;
+}
+
+.mrd-link:hover {
+    color: var(--ink);
+}
+
+.mrd-submit {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    background: var(--yellow);
+    color: var(--ink);
+    border: none;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease, opacity 0.15s ease;
+}
+
+.mrd-submit:hover:not(:disabled) {
+    background: var(--yellow-dark);
+}
+
+.mrd-submit:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.mrd-submit:focus-visible {
+outline: 2px solid var(--ink);
+outline-offset: 2px;
+}
+
+.mrd-banner {
+    margin: 0 0 1.25rem;
+    padding: 0.7rem 0.85rem;
+    font-size: 0.85rem;
+    border-left: 2px solid var(--error);
+    background: #FBF1EE;
+    color: var(--error);
+}
+
+.mrd-banner.success {
+    border-left-color: #3E6B4C;
+    background: #EEF4EF;
+    color: #2C5138;
+}
+
+.mrd-footer-text {
+    margin-top: 1.75rem;
+    font-size: 0.85rem;
+    color: var(--slate);
+}
+
+@media (max-width: 860px) {
+    .mrd-root {
+        flex-direction: column;
+    }
+    .mrd-brief {
+        min-height: auto;
+        padding: 2rem 1.75rem;
+    }
+    .mrd-headline {
+        font-size: 1.6rem;
+        margin: 1.5rem 0;
+    }
+    .mrd-spark {
+        max-width: 260px;
+    }
+    .mrd-panel {
+        padding: 2rem 1.75rem 3rem;
+    }
+}
