@@ -127,7 +127,7 @@ export default function Dashboard({ youtubeSlot, githubSlot }) {
         <button className="btn" onClick={() => setAddWidgetOpen(true)}>+ Add Widget</button>
       </div>
 
-      {mounted && (
+      {mounted && hydrated && (
         <div ref={containerRef}>
           <ReactGridLayout
             className="layout"
