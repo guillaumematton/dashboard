@@ -21,9 +21,12 @@ The frontend needs a .env.local to work formated as the .env.local.exemple in wh
 To get your youtube api key, you need to:  
 - go to [Google Cloud Console](https://console.cloud.google.com/)
 - create a new project
-- enable the YouTube Data API
+- Go to "API et services"
+- Search "Youtube Data API v3"
+- Activate it
 - create API KEY
 - copy it in your .env.local file
+
 
 ## Github commits
 
@@ -38,4 +41,4 @@ To generate the PAT:
 - give it a name
 - select the scope `repo:content read`
 - click on "Generate token"
-- copy your token into the box asking for it
+- copy your token into the .env.local file
