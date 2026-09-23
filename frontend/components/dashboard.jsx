@@ -7,14 +7,19 @@ import "react-resizable/css/styles.css";
 import Widget from "./widget";
 import "../css/dashboard.css";
 
-function loadLayout() {
+const STORAGE_KEY = "dashboard-layout-v1";
+
+export function loadLayout() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if (Array.isArray(saved) && saved.length) return saved;
+  } catch {}
   return [];
 }
 
 export default function Dashboard({ youtubeSlot }) {
-  const STORAGE_KEY = "dashboard-layout-v1";
-  const [layout, setLayout] = useState([]);
-  const [visible, setVisible] = useState(loadLayout());
+  const [layout, setLayout] = useState(loadLayout());
+  const [visible, setVisible] = useState(loadLayout().map((item) => item.i));
   const [hydrated, setHydrated] = useState(false);
   const { width, containerRef, mounted } = useContainerWidth();
 
@@ -86,8 +91,7 @@ export default function Dashboard({ youtubeSlot }) {
       setHydrated(true);
     }, []);
   
-    // Persist arrangement on every change — but only after initial hydration,
-    // so this doesn't immediately overwrite saved data with the [] default
+    // Persist arrangement on every change — but only after initial hydration
     useEffect(() => {
       if (!hydrated) return;
       localStorage.setItem(STORAGE_KEY, JSON.stringify(layout));
