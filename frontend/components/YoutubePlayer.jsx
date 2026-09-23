@@ -1,13 +1,13 @@
 'use client';
 
-import YouTube from 'react-youtube';
-
 export default function YouTubePlayer({ videoId }) {
-  const opts = {
-    height: '390',
-    width: '640',
-    playerVars: { autoplay: 1, modestbranding: 1 },
-  };
-
-  return <YouTube videoId={videoId} opts={opts} />;
-}   
+  return (
+    <iframe
+      width="100%"
+      height="100%"
+      src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1`}
+      title="YouTube video player"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    ></iframe>
+  );
+}
