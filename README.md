@@ -41,4 +41,4 @@ To generate the PAT:
 - give it a name
 - select the scope `repo:content read`
 - click on "Generate token"
-- copy your token into the box asking for it
+- copy your token into the .env.local file
