@@ -17,14 +17,14 @@ export function loadLayout() {
   return [];
 }
 
-export default function Dashboard({ youtubeSlot }) {
+export default function Dashboard({ youtubeSlot, githubSlot }) {
   const [layout, setLayout] = useState(loadLayout());
   const [visible, setVisible] = useState(loadLayout().map((item) => item.i));
   const [hydrated, setHydrated] = useState(false);
   const { width, containerRef, mounted } = useContainerWidth();
 
   const registry = {
-    github:   { title: "GitHub Activity",  accent: "#8b949e", render: () => <p>GitHub feed…</p> },
+    github:   { title: "GitHub Activity",  accent: "#8b949e", render: () => githubSlot },
     youtube:  { title: "YouTube Channel",  accent: "#ff0000", render: () => youtubeSlot },
     weather:  { title: "Weather · Barcelona", accent: "#6ea8fe", render: () => <p>22°C, sunny…</p> },
     maps: { title: "Google Maps", accent: "#fbbc05", render: () => <p>Park Güell → Sagrada Família…</p> },
