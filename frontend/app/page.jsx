@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import Dashboard from "../components/dashboard";
 import YouTubeLive from "../components/youtube";
 import GithubActivity from "../components/githubActivity";
+import Weather from "../components/weather";
 
 export default function Page() {
   return (
@@ -14,6 +15,11 @@ export default function Page() {
       githubSlot={
         <Suspense fallback={<p>Loading GitHub Activity...</p>}>
           <GithubActivity username="Bat-J" />
+        </Suspense>
+      }
+      weatherSlot={
+        <Suspense fallback={<p>Loading Weather...</p>}>
+          <Weather />
         </Suspense>
       }
     />
