@@ -3,6 +3,7 @@ import Dashboard from "../components/dashboard";
 import YouTubeLive from "../components/youtube";
 import GithubActivity from "../components/githubActivity";
 import Weather from "../components/weather";
+import Clock from "../components/clock";
 
 export default function Page() {
   return (
@@ -20,6 +21,11 @@ export default function Page() {
       weatherSlot={
         <Suspense fallback={<p>Loading Weather...</p>}>
           <Weather />
+        </Suspense>
+      }
+      clockSlot={
+        <Suspense fallback={<p>Loading Clock...</p>}>
+          <Clock />
         </Suspense>
       }
     />

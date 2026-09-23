@@ -17,7 +17,7 @@ export function loadLayout() {
   return [];
 }
 
-export default function Dashboard({ youtubeSlot, githubSlot, weatherSlot }) {
+export default function Dashboard({ youtubeSlot, githubSlot, weatherSlot, clockSlot }) {
   const [layout, setLayout] = useState(loadLayout());
   const [visible, setVisible] = useState(loadLayout().map((item) => item.i));
   const [hydrated, setHydrated] = useState(false);
@@ -28,7 +28,7 @@ export default function Dashboard({ youtubeSlot, githubSlot, weatherSlot }) {
     youtube:  { title: "YouTube Channel",  accent: "#ff0000", render: () => youtubeSlot },
     weather:  { title: "Weather · Barcelona", accent: "#6ea8fe", render: () => weatherSlot },
     maps: { title: "Google Maps", accent: "#fbbc05", render: () => <p>Park Güell → Sagrada Família…</p> },
-    clock: { title: 'Clock', accent: "#0000", render: () => <p>Current time: ...</p> }
+    clock: { title: 'Clock', accent: "#0000", render: () => clockSlot },
   };
 
   const handleLayoutChange = useCallback((newLayout) => setLayout(newLayout), []);
