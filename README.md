@@ -9,12 +9,19 @@ EPITECH project planned to be a usable dashboard tailored to our need.
 - mysql
 - JWT
 
-Why? Ease of use.
+ExpressJs: Fast, REST API and lightweight
+ReactJs: Responsive
+MySql: Simple and effective
+JWT: Useful for the authentification page
+
 
 ## Widgets
 
 - weather
-- my
+- clock
+- youtube
+- github
+- google maps (planned)
 
 ## Frontend .env.local
 The frontend needs a .env.local to work formated as the .env.local.exemple in which you need to put in your youtube api key.  
