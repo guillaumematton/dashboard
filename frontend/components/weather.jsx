@@ -1,5 +1,6 @@
 "use client"
 import { useState, useEffect } from "react";
+import "../css/weather.css";
 
 export default function Weather() {
   const [weather, setWeather] = useState(null);
