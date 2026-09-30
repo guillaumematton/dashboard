@@ -1,26 +1,33 @@
-'use client';
-import AuthPage from './login/page.jsx';
-import Register from './register/page.jsx';
+import { Suspense } from "react";
+import Dashboard from "../components/dashboard";
+import YouTubeLive from "../components/youtube";
+import GithubActivity from "../components/githubActivity";
+import Weather from "../components/weather";
+import Clock from "../components/clock";
 
 export default function Page() {
-  return <AuthPage />;
+  return (
+    <Dashboard
+      youtubeSlot={
+        <Suspense fallback={<p>Loading YouTube Live...</p>}>
+          <YouTubeLive channelId="UCyMXuuk-eHgkLuaa6L95iMg" />
+        </Suspense>
+      }
+      githubSlot={
+        <Suspense fallback={<p>Loading GitHub Activity...</p>}>
+          <GithubActivity username="Bat-J" />
+        </Suspense>
+      }
+      weatherSlot={
+        <Suspense fallback={<p>Loading Weather...</p>}>
+          <Weather />
+        </Suspense>
+      }
+      clockSlot={
+        <Suspense fallback={<p>Loading Clock...</p>}>
+          <Clock />
+        </Suspense>
+      }
+    />
+  );
 }
-
-/*
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { useAuth } from '../hooks/useAuth';
-
-export default function Page() {
-  const router = useRouter();
-  const { isAuthenticated, login } = useAuth();
-  
-  useEffect(() => {
-    if (isAuthenticated) {
-      router.push('/dashboard');
-    } else {
-      router.push('/login');
-    }
-  }, [isAuthenticated, router]);
-  return null;
-}*/
