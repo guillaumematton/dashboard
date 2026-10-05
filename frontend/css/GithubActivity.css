@@ -1,0 +1,69 @@
+.gh-list {
+  --gh-ink: #14181f;
+  --gh-brass: #b08d57;
+  --gh-cream: #f2efe7;
+  --gh-slate: #8891a0;
+  --gh-line: rgba(242, 239, 231, 0.1);
+
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--gh-cream);
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.gh-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--gh-line);
+}
+
+.gh-item:last-child {
+  border-bottom: none;
+}
+
+.gh-repo {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--gh-brass);
+  letter-spacing: 0.01em;
+}
+
+.gh-message {
+  font-size: 0.85rem;
+  color: var(--gh-cream);
+  line-height: 1.35;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.gh-empty,
+.gh-error {
+  margin: 0;
+  padding: 0.75rem 0;
+  font-size: 0.85rem;
+  color: var(--gh-slate);
+  font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.gh-error {
+  color: #c66b53;
+}
+
+/* Scrollbar discret, cohérent avec le thème sombre */
+.gh-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.gh-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.gh-list::-webkit-scrollbar-thumb {
+  background: var(--gh-line);
+}
