@@ -11,7 +11,7 @@
   max-width: 280px;
   padding: 1.25rem 1.4rem;
   box-sizing: border-box;
-  background: linear-gradient(160deg, var(--w-ink) 0%, var(--w-ink-2) 100%);
+  background: var(--w-ink);
   color: var(--w-cream);
   font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
 }

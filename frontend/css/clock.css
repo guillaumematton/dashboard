@@ -1,0 +1,97 @@
+.clock-container {
+  --c-ink: #14181f;
+  --c-ink-2: #1b212b;
+  --c-brass: #b08d57;
+  --c-cream: #f2efe7;
+  --c-slate: #8891a0;
+  --c-line: rgba(242, 239, 231, 0.12);
+  --c-error: #c66b53;
+
+  text-align: center;
+  font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  padding: 1.5rem;
+  max-width: 320px;
+  margin: 0 auto;
+  background: var(--c-ink);
+  color: var(--c-cream);
+}
+
+.clock-title {
+  margin: 0 0 1.25rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--c-slate);
+}
+
+.clock-form {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 1rem;
+}
+
+.clock-input {
+  flex: 1;
+  padding: 0.5rem 0.65rem;
+  font-size: 0.85rem;
+  font-family: inherit;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--c-line);
+  color: var(--c-cream);
+}
+
+.clock-input::placeholder {
+  color: var(--c-slate);
+}
+
+.clock-input:focus {
+  outline: none;
+  border-color: var(--c-brass);
+}
+
+.clock-button {
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  font-family: inherit;
+  font-weight: 600;
+  border: none;
+  background: var(--c-brass);
+  color: var(--c-ink);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.clock-button:hover {
+  background: #8f7040;
+}
+
+.clock-display {
+  margin-top: 1.5rem;
+}
+
+.clock-time {
+  font-size: 2.6rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+  color: var(--c-cream);
+}
+
+.clock-date {
+  font-size: 0.95rem;
+  color: var(--c-slate);
+  margin-top: 0.25rem;
+}
+
+.clock-tz {
+  font-size: 0.78rem;
+  color: var(--c-slate);
+  margin-top: 0.15rem;
+  text-transform: lowercase;
+}
+
+.clock-error {
+  color: var(--c-error);
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+}
