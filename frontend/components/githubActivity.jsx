@@ -1,25 +1,54 @@
-import { fetchLatestCommits } from "./github";
+"use client"
 import "../css/GithubActivity.css";
+import { useState, useEffect, useCallback } from "react";
 
-export default async function GithubActivity({ username, repoFilter, limit = 20 }) {
-  const token = process.env.GITHUB_TOKEN;
+export default function GithubActivity({ username, repoFilter, limit = 20 }) {
+  const [refreshMs, setRefreshMs] = useState(60000);
+  const [commits, setCommits] = useState([]);
+  const [error, setError] = useState(null);
 
-  try {
-    const commits = await fetchLatestCommits(token, username, limit, repoFilter);
+  const fetchCommits = useCallback(async () => {
+    try {
+      const params = new URLSearchParams({ username, limit });
+      if (repoFilter) params.set("repoFilter", repoFilter);
+      const res = await fetch(`/api/githubActivity?${params}`);
+      const data = await res.json();
+      if (data.error) throw new Error(data.error);
+      setCommits(data.commits);
+      setError(null);
+    } catch (e) {
+      setError(e.message);
+    }
+  }, [username, repoFilter, limit]);
 
-    if (!commits.length) return <p className="gh-empty">No recent activity.</p>;
+  useEffect(() => {
+    fetchCommits();
+    const id = setInterval(fetchCommits, refreshMs);
+    return () => clearInterval(id);
+  }, [fetchCommits, refreshMs]);
 
-    return (
-      <ul className="gh-list">
-        {commits.map((c) => (
-          <li key={c.sha} className="gh-item">
-            <span className="gh-repo">{c.repo}</span>
-            <span className="gh-message">{c.message}</span>
-          </li>
-        ))}
-      </ul>
-    );
-  } catch (err) {
-    return <p className="gh-error">GitHub Error : {err.message}</p>;
-  }
-}   
+  return (
+    <div>
+      <select className="gh-select" value={refreshMs} onChange={(e) => setRefreshMs(Number(e.target.value))}>
+        <option value={30000}>30 s</option>
+        <option value={60000}>1 min</option>
+        <option value={300000}>5 min</option>
+        <option value={900000}>15 min</option>
+      </select>
+
+      {error && <p className="gh-error">Error: {error}</p>}
+      {!error && commits.length === 0 && <p className="gh-empty">No recent activity.</p>}
+
+      {commits.length > 0 && (
+        <ul className="gh-list">
+          {commits.map((commit) => (
+            <li key={commit.sha} className="gh-item">
+              <span className="gh-repo">{commit.repo}</span>
+              <span className="gh-message">{commit.message}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}

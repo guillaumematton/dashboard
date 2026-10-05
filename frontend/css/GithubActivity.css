@@ -67,3 +67,25 @@
 .gh-list::-webkit-scrollbar-thumb {
   background: var(--gh-line);
 }
+
+.gh-select {
+  width: 100%;
+  margin-bottom: 0.75rem;
+  padding: 0.5rem 0.65rem;
+  font-size: 0.8rem;
+  font-family: 'IBM Plex Sans', sans-serif;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--gh-line);
+  color: var(--gh-cream);
+  cursor: pointer;
+}
+
+.gh-select:focus {
+  outline: none;
+  border-color: var(--gh-brass);
+}
+
+.gh-select option {
+  background: var(--gh-ink);
+  color: var(--gh-cream);
+}

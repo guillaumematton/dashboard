@@ -50,18 +50,6 @@ function Clock() {
         <button type="submit" className="clock-button">Sync</button>
       </form>
 
-     <select
-      className="clock-select"
-      value={refreshMs}
-      onChange={(e) => setRefreshMs(Number(e.target.value))}
-    >
-      <option value={1000}>1 s</option>
-      <option value={5000}>5 s</option>
-      <option value={10000}>10 s</option>
-      <option value={30000}>30 s</option>
-      <option value={60000}>1 min</option>
-    </select>
-
       {error && <p className="clock-error">Error: {error}</p>}
 
       {time && (
