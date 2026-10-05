@@ -95,3 +95,25 @@
   font-size: 0.85rem;
   margin-top: 0.5rem;
 }
+
+.clock-select {
+  width: 100%;
+  margin-top: 0.75rem;
+  padding: 0.5rem 0.65rem;
+  font-size: 0.8rem;
+  font-family: inherit;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--c-line);
+  color: var(--c-cream);
+  cursor: pointer;
+}
+
+.clock-select:focus {
+  outline: none;
+  border-color: var(--c-brass);
+}
+
+.clock-select option {
+  background: var(--c-ink);
+  color: var(--c-cream);
+}
