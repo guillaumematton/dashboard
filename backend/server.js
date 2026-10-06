@@ -6,13 +6,15 @@ import jwt from "jsonwebtoken"
 
 const app = express();
 
-cors();
+app.use(cors());
 
 app.use(express.json());
 
 app.post("/api/v1/register", async (req, res) => {
   let connection;
   const { email, password } = req.body;
+
+  console.log("Registering user:", email);
 
   try {
     connection = await pool.getConnection();

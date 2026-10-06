@@ -40,15 +40,39 @@ export default function Register({ onSubmit } = {}) {
         await onSubmit({ email, password, remember });
         setStatus("success");
       } else {
-        // Demo behaviour when no onSubmit handler is wired up yet.
-        await new Promise((res) => setTimeout(res, 900));
-        setStatus("success");
+        await fetchRegister();
       }
     } catch (err) {
       setStatus("error");
       setErrorMessage(err?.message || "Couldn't register you in. Check your details and try again.");
     }
   }
+
+  async function fetchRegister() {
+    fetch("http://localhost:5000/api/v1/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Registration failed");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        console.log("Registration successful:", data);
+        // Redirect or show success message
+        window.location.href = '/login';
+      })
+      .catch((err) => {
+        console.error(err);
+        setErrorMessage(err.message);
+        setStatus("error");
+      })
+    }
 
   return (
     <div className="mrd-root">
