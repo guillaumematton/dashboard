@@ -63,8 +63,6 @@ export default function Register({ onSubmit } = {}) {
         return res.json();
       })
       .then((data) => {
-        console.log("Registration successful:", data);
-        // Redirect or show success message
         window.location.href = '/login';
       })
       .catch((err) => {

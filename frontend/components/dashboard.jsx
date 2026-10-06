@@ -6,6 +6,25 @@ import "react-resizable/css/styles.css";
 import Widget from "./widget";
 import "../css/dashboard.css";
 
+async function checkLogin() {
+  try {
+      const token = localStorage.getItem("token");
+      if (!token) return false;
+  
+      const response = await fetch("http://localhost:5000/api/v1/verify", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+      });
+  
+      return response.ok;
+    } catch (err) {
+      return false;
+    }
+}
+
 const STORAGE_KEY = "dashboard-layouts-v2"; // new key: the saved format changed
 const BREAKPOINTS = { lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 };
 const COLS = { lg: 16, md: 12, sm: 8, xs: 4, xxs: 2 };
@@ -15,6 +34,13 @@ const makeId = (type) => `${type}__${crypto.randomUUID().slice(0, 8)}`;
 const typeOf = (id) => id.split("__")[0];
 
 export default function Dashboard({ youtubeLiveSlot, githubSlot, weatherSlot, clockSlot, youtubeVideoSlot }) {
+  useEffect(() => {
+    const status = checkLogin();
+    if (!status) {
+      window.location.href = "/login";
+    }
+  }, []);
+
   const [layouts, setLayouts] = useState({ lg: [] });
   const [hydrated, setHydrated] = useState(false);
   const [addWidgetOpen, setAddWidgetOpen] = useState(false);

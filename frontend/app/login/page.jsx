@@ -41,14 +41,37 @@ export default function AuthPage({ onSubmit } = {}) {
         await onSubmit({ email, password, remember });
         setStatus("success");
       } else {
-        // Demo behaviour when no onSubmit handler is wired up yet.
-        await new Promise((res) => setTimeout(res, 900));
-        setStatus("success");
+        await fetchLogin();
       }
     } catch (err) {
       setStatus("error");
       setErrorMessage(err?.message || "Couldn't sign you in. Check your details and try again.");
     }
+  }
+
+  async function fetchLogin() {
+    fetch("http://localhost:5000/api/v1/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Login failed");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        localStorage.setItem("token", data.token);
+        window.location.href = '/';
+      })
+      .catch((err) => {
+        console.error(err);
+        setErrorMessage(err.message);
+        setStatus("error");
+      })
   }
 
   return (

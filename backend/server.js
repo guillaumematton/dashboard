@@ -62,6 +62,32 @@ app.post("/api/v1/login", async (req, res) => {
   }
 });
 
+app.post("/api/v1/verify", async (req, res) => {
+  let connection;
+  const token = req.headers.authorization.split(' ')[1];
+  const secret_key = process.env.JWT_SECRET || 'Set environment variable for JWT_SECRET';
+
+  if (secret_key == 'Set environment variable for JWT_SECRET') {
+    console.log('Set environment variable for JWT_SECRET');
+    res.status(500).json({ message: 'Invalid credentials in server environment' });
+    return;
+  }
+
+  try {
+    connection = await pool.getConnection();
+    const id = jwt.verify(token, secret_key);
+    const [user] = await connection.query("SELECT * FROM users WHERE id = ?", id);
+    if (user.length == 0) return res.status(400).json({ error: "Wrong token or user not found" });
+
+    res.status(200).json({ message: "Token verified successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  } finally {
+    if (connection) connection.release();
+  }
+});
+
 app.listen(5000, () => {
   console.log("Server is running on port 5000");
 });
