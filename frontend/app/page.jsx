@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import Dashboard from "../components/dashboard";
-import YouTubeLive from "../components/youtube";
+import YouTubeLive from "../components/youtubeLive";
+import YoutubeVideo from "../components/youtubeVideo";
 import GithubActivity from "../components/githubActivity";
 import Weather from "../components/weather";
 import Clock from "../components/clock";
@@ -8,7 +9,7 @@ import Clock from "../components/clock";
 export default function Page() {
   return (
     <Dashboard
-      youtubeSlot={
+      youtubeLiveSlot={
         <Suspense fallback={<p>Loading YouTube Live...</p>}>
           <YouTubeLive channelId="UCyMXuuk-eHgkLuaa6L95iMg" />
         </Suspense>
@@ -26,6 +27,11 @@ export default function Page() {
       clockSlot={
         <Suspense fallback={<p>Loading Clock...</p>}>
           <Clock />
+        </Suspense>
+      }
+      youtubeVideoSlot={
+        <Suspense fallback={<p>Loading Youtube Video Widget...</p>}>
+          <YoutubeVideo />
         </Suspense>
       }
     />

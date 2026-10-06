@@ -14,7 +14,7 @@ const COLS = { lg: 16, md: 12, sm: 8, xs: 4, xxs: 2 };
 const makeId = (type) => `${type}__${crypto.randomUUID().slice(0, 8)}`;
 const typeOf = (id) => id.split("__")[0];
 
-export default function Dashboard({ youtubeSlot, githubSlot, weatherSlot, clockSlot }) {
+export default function Dashboard({ youtubeLiveSlot, githubSlot, weatherSlot, clockSlot, youtubeVideoSlot }) {
   const [layouts, setLayouts] = useState({ lg: [] });
   const [hydrated, setHydrated] = useState(false);
   const [addWidgetOpen, setAddWidgetOpen] = useState(false);
@@ -23,7 +23,8 @@ export default function Dashboard({ youtubeSlot, githubSlot, weatherSlot, clockS
   // w/h are the default size (in grid units) for a newly added instance
   const registry = {
     github:  { title: "GitHub Activity",     accent: "#8b949e", w: 4, h: 8,  render: () => githubSlot },
-    youtube: { title: "YouTube Live",     accent: "#ff0000", w: 4, h: 8,  render: () => youtubeSlot },
+    youtube: { title: "YouTube Live", accent: "#ff0000", w: 4, h: 8, render: () => youtubeLiveSlot },
+    youtubeVid: { title: "YouTube Video", accent: "#ff0000", w: 4, h: 8, render: () => youtubeVideoSlot },
     weather: { title: "Weather", accent: "#6ea8fe", w: 3, h: 6,  render: () => weatherSlot },
     maps:    { title: "Google Maps",         accent: "#fbbc05", w: 4, h: 8,  render: () => <p>Park Güell → Sagrada Família…</p> },
     clock:   { title: "Clock",               accent: "#0000",   w: 3, h: 4,  render: () => clockSlot },
