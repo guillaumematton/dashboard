@@ -18,7 +18,7 @@ export default function Dashboard({ youtubeSlot, githubSlot, weatherSlot, clockS
   const [layouts, setLayouts] = useState({ lg: [] });
   const [hydrated, setHydrated] = useState(false);
   const [addWidgetOpen, setAddWidgetOpen] = useState(false);
-  const { containerRef, mounted, width } = useContainerWidth();
+  const { containerRef, mounted, width } = useContainerWidth({ measureBeforeMount: true });
 
   // w/h are the default size (in grid units) for a newly added instance
   const registry = {
@@ -29,11 +29,23 @@ export default function Dashboard({ youtubeSlot, githubSlot, weatherSlot, clockS
     clock:   { title: "Clock",               accent: "#0000",   w: 3, h: 4,  render: () => clockSlot },
   };
 
-  // Load once after mount (client-only)
+  const clamp = (items, cols) =>
+    items.map((it) => {
+      const w = Math.min(it.w, cols);
+      const x = Math.max(0, Math.min(it.x, cols - w));
+      return { ...it, w, x };
+    });
+  
   useEffect(() => {
     try {
       const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
-      if (saved && Array.isArray(saved.lg)) setLayouts(saved);
+      if (saved && Array.isArray(saved.lg)) {
+        const fixed = {};
+        for (const bp of Object.keys(saved)) {
+          if (COLS[bp]) fixed[bp] = clamp(saved[bp], COLS[bp]);
+        }
+        setLayouts(fixed);
+      }
     } catch {}
     setHydrated(true);
   }, []);
@@ -98,19 +110,20 @@ export default function Dashboard({ youtubeSlot, githubSlot, weatherSlot, clockS
         <button className="btn" onClick={() => setAddWidgetOpen(true)}>+ Add Widget</button>
       </div>
 
+      <div ref={containerRef} style={{ width: "100%" }}>
       {mounted && hydrated && (
-        <div ref={containerRef}>
           <Responsive
             className="layout"
             layouts={layouts}
             breakpoints={BREAKPOINTS}
             cols={COLS}
-            rowHeight={30}
+            rowHeight={15}
             margin={[16, 16]}
             containerPadding={[0, 0]}
-            draggableHandle=".widget__header"
+            dragConfig={{ bounded: true, handle: ".widget__header" }}
             onLayoutChange={handleLayoutChange}
             width={width}
+            isBounded
           >
             {instanceIds
               .filter((id) => registry[typeOf(id)])
@@ -129,8 +142,8 @@ export default function Dashboard({ youtubeSlot, githubSlot, weatherSlot, clockS
                 );
               })}
           </Responsive>
-        </div>
-      )}
+        )}
+      </div>
 
       {addWidgetOpen && (
         <div className="overlay">
