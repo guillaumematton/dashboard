@@ -50,6 +50,13 @@ To generate the PAT:
 - click on "Generate token"
 - copy your token into the .env.local file
 
+## Google maps APIs
+
+- Go to [Google Maps Platform](https://developers.google.com/maps/documentation/javascript/demo-key)
+- click on "Get a Demo Key"
+- copy api key into the .env.local file
+
+
 ## API used and explanation
 
 ### Time API
@@ -95,3 +102,6 @@ Type is the format we want. Here we want the video so the type is video.
 Max results is the number of results we want to get.  
 Order is the order of the results. Here we want the results sorted by date.  
 Key is the API key you get from the Google Cloud Console.  
+
+
+### Google Maps API
