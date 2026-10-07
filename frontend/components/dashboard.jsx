@@ -11,14 +11,18 @@ async function checkLogin() {
       const token = localStorage.getItem("token");
       if (!token) return false;
   
-      const response = await fetch("http://localhost:8080/api/v1/verify", {
+      const response = await fetch("http://localhost:5000/api/v1/verify", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${token}`,
         },
       });
-  
+
+    if (!response.ok) {
+      localStorage.removeItem(token);
+      localStorage.removeItem("dashboard-layouts-v2");
+    }
       return response.ok;
     } catch (err) {
       return false;

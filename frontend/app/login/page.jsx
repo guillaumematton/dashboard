@@ -50,11 +50,11 @@ export default function AuthPage({ onSubmit } = {}) {
   }
 
   function handleGithubLogin() {
-    window.location.href = `http://localhost:8080/api/v1/auth/github`;
+    window.location.href = `http://localhost:5000/api/v1/auth/github`;
   }
 
   async function fetchLogin() {
-    fetch("http://localhost:8080/api/v1/login", {
+    fetch("http://localhost:5000/api/v1/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

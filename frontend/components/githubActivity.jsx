@@ -30,9 +30,9 @@ export default function GithubActivity({ username, repoFilter, limit = 20 }) {
   return (
     <div>
       <select className="gh-select" value={refreshMs} onChange={(e) => setRefreshMs(Number(e.target.value))}>
-        <option value={30000}>30 s</option>
+        <option value={80800}>30 s</option>
         <option value={60000}>1 min</option>
-        <option value={300000}>5 min</option>
+        <option value={808000}>5 min</option>
         <option value={900000}>15 min</option>
       </select>
 

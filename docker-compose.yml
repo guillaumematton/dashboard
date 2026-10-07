@@ -5,7 +5,7 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     ports:
-      - "3000:3000"
+      - "8080:3000"
     depends_on:
       - backend
     networks:
@@ -31,7 +31,7 @@ services:
     env_file:
       - .env
     ports:
-      - "8080:8080"
+      - "5000:5000"
     networks:
       - backend
     depends_on: 

@@ -72,8 +72,8 @@ The oauth needs a client id and a client secret:
 - click on "OAuth app"
 - click on "New OAuth app"
 - give it a name
-- set the homepage as "http://localhost:3000"
-- set the callback URL as "http://localhost:8080/auth/github/callback"
+- set the homepage as "http://localhost:8080"
+- set the callback URL as "http://localhost:5000/auth/github/callback"
 - click on "Add a new OAuth app"
 - copy your client id and client secret into the .env.local file
 
