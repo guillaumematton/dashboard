@@ -14,7 +14,7 @@ app.use(cookieParser());
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
 const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
-const CALLBACK = "http://localhost:5000/api/v1/auth/github/callback";
+const CALLBACK = "http://localhost:8080/api/v1/auth/github/callback";
 
 app.get("/api/v1/auth/github", (req, res) => {
   const state = crypto.randomBytes(16).toString("hex");
@@ -38,7 +38,7 @@ app.get("/api/v1/auth/github/callback", async (req, res) => {
     res.status(500).json({ message: 'Invalid credentials in server environment' });
     return;
   }
-  const fail = (msg) => res.redirect(`http://localhost:8080/auth/callback?error=${encodeURIComponent(msg)}`);
+  const fail = (msg) => res.redirect(`http://localhost:3000/auth/callback?error=${encodeURIComponent(msg)}`);
   try {
     const { code, state } = req.query;
     if (!code || !state || state !== req.cookies.oauth_state) return fail("Invalid state");
@@ -71,7 +71,7 @@ app.get("/api/v1/auth/github/callback", async (req, res) => {
     else if (!user[0].verified) await connection.query('UPDATE users SET verified = 1 WHERE id = ?', [user[0].id]);
 
     const token = jwt.sign({ id: user[0].id }, secret_key);
-    res.redirect(`http://localhost:8080/auth/callback?token=${token}`);
+    res.redirect(`http://localhost:3000/auth/callback?token=${token}`);
   } catch (e) {
     console.error(e);
     fail("Sign-in failed");
@@ -156,6 +156,6 @@ app.post("/api/v1/verify", async (req, res) => {
   }
 });
 
-app.listen(5000, () => {
-  console.log("Server is running on port 5000");
+app.listen(8080, () => {
+  console.log("Server is running on port 8080");
 });

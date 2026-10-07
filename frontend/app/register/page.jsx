@@ -49,7 +49,7 @@ export default function Register({ onSubmit } = {}) {
   }
 
   async function fetchRegister() {
-    fetch("http://localhost:5000/api/v1/register", {
+    fetch("http://localhost:8080/api/v1/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
