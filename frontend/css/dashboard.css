@@ -67,6 +67,10 @@ body {
   width: auto;
 }
 
+@media screen and (max-width: 600px) {
+    .dashboard-logo {display:none;}
+}
+
 .dashboard-actions {
   display: flex;
   align-items: center;

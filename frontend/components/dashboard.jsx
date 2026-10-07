@@ -34,8 +34,8 @@ const makeId = (type) => `${type}__${crypto.randomUUID().slice(0, 8)}`;
 const typeOf = (id) => id.split("__")[0];
 
 export default function Dashboard({ youtubeLiveSlot, githubSlot, weatherSlot, clockSlot, youtubeVideoSlot, mapsSlot }) {
-  useEffect(() => {
-    const status = checkLogin();
+  useEffect(async () => {
+    const status = await checkLogin();
     if (!status) {
       window.location.href = "/login";
     }
@@ -112,12 +112,11 @@ export default function Dashboard({ youtubeLiveSlot, githubSlot, weatherSlot, cl
     });
   }, []);
 
-  const handleLogin = () => {
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem(STORAGE_KEY);
     window.location.href = "/login";
   };
-  const handleRegister = () => {
-    window.location.href = "/register";
-  }
 
   const instanceIds = (layouts.lg ?? []).map((item) => item.i);
 
@@ -125,10 +124,9 @@ export default function Dashboard({ youtubeLiveSlot, githubSlot, weatherSlot, cl
     <div className="dashboard">
       <div className="dashboard-banner">
         <div className="dashboard-header">
-          <img src="/meunier.png" alt="Logo" className="dashboard-logo" />
+          <img src="/meunier.png" alt="Logo" loading="lazy" className="dashboard-logo" />
           <div className="dashboard-actions">
-            <button className="btn" onClick={handleLogin}>Login</button>
-            <button className="btn" onClick={handleRegister}>Register</button>
+            <button className="btn" onClick={handleLogout}>Logout</button>
           </div>
         </div>
       </div>

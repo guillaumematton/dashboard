@@ -143,7 +143,7 @@ app.post("/api/v1/verify", async (req, res) => {
 
   try {
     connection = await pool.getConnection();
-    const id = jwt.verify(token, secret_key);
+    const id = jwt.verify(token, secret_key).id;
     const [user] = await connection.query("SELECT * FROM users WHERE id = ?", id);
     if (user.length == 0) return res.status(400).json({ error: "Wrong token or user not found" });
 
