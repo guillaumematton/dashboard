@@ -17,7 +17,7 @@ export default function Page() {
       }
       githubSlot={
         <Suspense fallback={<p>Loading GitHub Activity...</p>}>
-          <GithubActivity username="Bat-J" />
+          <GithubActivity/>
         </Suspense>
       }
       weatherSlot={

@@ -47,10 +47,7 @@ docker-compose up
 - mysql
 - JWT
 
-ExpressJs: Fast, REST API and lightweight
-ReactJs: Responsive
-MySql: Simple and effective
-JWT: Useful for the authentification page
+[dashboard-stacks](frontend/public/dashboard-stacks.png "Dashboard Stacks")
 
 
 ## Widgets

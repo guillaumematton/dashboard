@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import { useState, useRef, useEffect } from "react";
 import "../../css/register.css";
-import logo from "../../images/meunier.png"
+import logo from "../../public/meunier.png"
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 

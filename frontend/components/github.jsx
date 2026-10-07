@@ -1,11 +1,14 @@
 const API = "https://api.github.com";
 
 function headers(token) {
-  return {
-    Authorization: `Bearer ${token}`,
+  const header = {
     Accept: "application/vnd.github+json",
     "X-GitHub-Api-Version": "2022-11-28",
-  };
+  }
+  if (token) {
+    header.Authorization = `Bearer ${token}`;
+  }
+  return header;
 }
 
 export async function validateToken(token) {
@@ -24,18 +27,9 @@ export async function fetchLatestCommits(token, username, limit = 20, repoFilter
     repos = [await res.json()];
   } else {
     // All repos (paginated)
-    let page = 1;
-    while (true) {
-      const res = await fetch(
-        `${API}/user/repos?per_page=100&page=${page}&sort=pushed`,
-        { headers: headers(token) }
-      );
-      if (!res.ok) break;
-      const batch = await res.json();
-      repos.push(...batch);
-      if (batch.length < 100) break;
-      page++;
-    }
+    const res = await fetch(`${API}/users/${encodeURIComponent(username)}/repos?per_page=100&sort=pushed`, { headers: headers(token) });
+    if (!res.ok) throw new Error(`Repo "${repoFilter}" not found or no access`);
+    repos = await res.json();
   }
 
   const results = await Promise.allSettled(
