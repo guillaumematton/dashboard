@@ -37,21 +37,6 @@ export default function Weather() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        setCoords({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-        });
-      },
-      (err) => {
-        console.error("Geolocation error:", err);
-        setError("Unable to retrieve your location. Please enter a city name.");
-      }
-    );
-  }, []);
-
-  useEffect(() => {
     if (!coords) return;
 
     const update = () => {
@@ -86,7 +71,21 @@ export default function Weather() {
         });
     }, [input]);
 
-    if (!weather) return <p>Chargement...</p>
+  if (!weather) return (
+    <div className="weather-card">
+      <form onSubmit={handleSearch} className="weather-form">
+        <input
+            type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Rechercher un lieu"
+            className="weather-input"
+        />
+        <button type="submit" className="weather-button">
+            Rechercher
+        </button>
+      </form>
+    </div>)
 
   return (
     <div className="weather-card">
