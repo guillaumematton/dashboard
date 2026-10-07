@@ -105,3 +105,9 @@ Key is the API key you get from the Google Cloud Console.
 
 
 ### Google Maps API
+
+Get the map:
+https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(place)}&key=${API_KEY}
+
+encodeURIComponent is the place that will be shown by default
+API_KEY is the API key you get from the Google Maps Platform. 
