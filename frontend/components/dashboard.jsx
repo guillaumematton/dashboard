@@ -33,7 +33,7 @@ const COLS = { lg: 16, md: 12, sm: 8, xs: 4, xxs: 2 };
 const makeId = (type) => `${type}__${crypto.randomUUID().slice(0, 8)}`;
 const typeOf = (id) => id.split("__")[0];
 
-export default function Dashboard({ youtubeLiveSlot, githubSlot, weatherSlot, clockSlot, youtubeVideoSlot }) {
+export default function Dashboard({ youtubeLiveSlot, githubSlot, weatherSlot, clockSlot, youtubeVideoSlot, mapsSlot }) {
   useEffect(() => {
     const status = checkLogin();
     if (!status) {
@@ -52,7 +52,7 @@ export default function Dashboard({ youtubeLiveSlot, githubSlot, weatherSlot, cl
     youtube: { title: "YouTube Live", accent: "#ff0000", w: 4, h: 8, render: () => youtubeLiveSlot },
     youtubeVid: { title: "YouTube Video", accent: "#ff0000", w: 4, h: 8, render: () => youtubeVideoSlot },
     weather: { title: "Weather", accent: "#6ea8fe", w: 3, h: 6,  render: () => weatherSlot },
-    maps:    { title: "Google Maps",         accent: "#fbbc05", w: 4, h: 8,  render: () => <p>Park Güell → Sagrada Família…</p> },
+    maps:    { title: "Google Maps",         accent: "#fbbc05", w: 4, h: 8,  render: () => mapsSlot },
     clock:   { title: "Clock",               accent: "#0000",   w: 3, h: 4,  render: () => clockSlot },
   };
 

@@ -5,6 +5,7 @@ import YoutubeVideo from "../components/youtubeVideo";
 import GithubActivity from "../components/githubActivity";
 import Weather from "../components/weather";
 import Clock from "../components/clock";
+import Maps from "../components/googleMaps";
 
 export default function Page() {
   return (
@@ -32,6 +33,11 @@ export default function Page() {
       youtubeVideoSlot={
         <Suspense fallback={<p>Loading Youtube Video Widget...</p>}>
           <YoutubeVideo />
+        </Suspense>
+      }
+      mapsSlot={
+        <Suspense fallback={<p>Loading Google Maps...</p>}>
+          <Maps />
         </Suspense>
       }
     />
