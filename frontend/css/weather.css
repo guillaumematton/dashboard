@@ -1,19 +1,69 @@
 .weather-card {
   --w-ink: #14181f;
-  --w-ink-2: #1b212b;
+  --w-ink-2: #14181f;
   --w-brass: #b08d57;
+  --w-brass-dark: #8f7040;
   --w-cream: #f2efe7;
   --w-slate: #8891a0;
   --w-line: rgba(242, 239, 231, 0.12);
+  --w-error: #c66b53;
 
-  position: relative;
   width: 100%;
   max-width: 280px;
-  padding: 1.25rem 1.4rem;
+  padding: 1.1rem 1.25rem;
   box-sizing: border-box;
-  background: var(--w-ink);
+  background: linear-gradient(160deg, var(--w-ink) 0%, var(--w-ink-2) 100%);
   color: var(--w-cream);
   font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.weather-form {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 0.85rem;
+}
+
+.weather-input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.45rem 0.6rem;
+  font-size: 0.8rem;
+  font-family: inherit;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--w-line);
+  color: var(--w-cream);
+}
+
+.weather-input::placeholder {
+  color: var(--w-slate);
+}
+
+.weather-input:focus {
+  outline: none;
+  border-color: var(--w-brass);
+}
+
+.weather-button {
+  padding: 0.45rem 0.8rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  font-family: inherit;
+  border: none;
+  background: var(--w-brass);
+  color: var(--w-ink);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s ease;
+}
+
+.weather-button:hover {
+  background: var(--w-brass-dark);
+}
+
+.weather-error {
+  margin: 0 0 0.75rem;
+  font-size: 0.78rem;
+  color: var(--w-error);
 }
 
 .weather-card p {
@@ -21,8 +71,10 @@
   justify-content: space-between;
   align-items: baseline;
   margin: 0;
-  padding: 0.55rem 0;
-  font-size: 0.9rem;
+  padding: 0.5rem 0;
+  font-size: 0.88rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
   border-bottom: 1px solid var(--w-line);
 }
 
@@ -31,30 +83,24 @@
 }
 
 .weather-card p::before {
-  content: attr(data-label);
+  font-size: 0.76rem;
+  font-weight: 400;
   color: var(--w-slate);
-  font-size: 0.78rem;
 }
 
 .weather-card p:nth-of-type(1)::before { content: "Temperature"; }
 .weather-card p:nth-of-type(2)::before { content: "Wind speed"; }
-.weather-card p:nth-of-type(3)::before { content: "Direction"; }
-
-.weather-card p span,
-.weather-card p {
-  font-variant-numeric: tabular-nums;
-  font-weight: 500;
-}
+.weather-card p:nth-of-type(3)::before { content: "Wind direction"; }
 
 .weather-card select {
   width: 100%;
-  margin-top: 1rem;
-  padding: 0.55rem 0.7rem;
+  margin-top: 0.85rem;
+  padding: 0.5rem 0.65rem;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--w-line);
   color: var(--w-cream);
   font-family: inherit;
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   cursor: pointer;
   appearance: none;
   -webkit-appearance: none;

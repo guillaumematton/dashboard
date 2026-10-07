@@ -1,32 +1,110 @@
 "use client"
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import "../css/weather.css";
+
+const fetchCoordinates = async (cityName) => {
+  try {
+    const response = await fetch(
+      `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(cityName)}&count=1&language=en&format=json`
+    );
+    const data = await response.json();
+    
+    if (data.results && data.results.length > 0) {
+      const { latitude, longitude } = data.results[0];
+      console.log(`Coordinates for ${cityName}:`, latitude, longitude);
+      return { latitude, longitude };
+    } else {
+      console.log("City not found");
+      return null;
+    }
+  } catch (error) {
+    console.error("Error fetching coordinates:", error);
+  }
+};
+
+const fetchWeather = async (latitude, longitude) => {
+  const response = await fetch(
+    `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true&timezone=Europe/Paris`
+  );
+  return response.json();
+}
 
 export default function Weather() {
   const [weather, setWeather] = useState(null);
   const [refreshMs, setRefreshMs] = useState(60000); // 60s — change to your preference
-
-  const fetchWeather = () => {
-    navigator.geolocation.getCurrentPosition(async (position) => {
-      const { latitude, longitude } = position.coords;
-      const response = await fetch(
-        `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true&timezone=Europe/Paris`
-      );
-      const data = await response.json();
-      setWeather(data);
-    });
-  };
+  const [input, setInput] = useState("Lille");
+  const [coords, setCoords] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchWeather(); // initial call
-    const interval = setInterval(fetchWeather, refreshMs);
-    return () => clearInterval(interval); // cleanup on unmount or when refreshMs changes
-  }, [refreshMs]);
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setCoords({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        });
+      },
+      (err) => {
+        console.error("Geolocation error:", err);
+        setError("Unable to retrieve your location. Please enter a city name.");
+      }
+    );
+  }, []);
 
-  if (!weather) return <p>Loading…</p>;
+  useEffect(() => {
+    if (!coords) return;
+
+    const update = () => {
+      fetchWeather(coords.latitude, coords.longitude)
+        .then((data) => setWeather(data))
+        .catch((err) => {
+          console.error(err);
+          setError("Error fetching weather data.");
+        });
+    };
+
+    update();
+    const interval = setInterval(update, refreshMs);
+    return () => clearInterval(interval);
+  }, [coords, refreshMs]);
+
+  const handleSearch = useCallback((e) => {
+        e.preventDefault();
+        if (!input.trim()) return;
+
+        fetchCoordinates(input.trim()).then((coords) => {
+            if (coords) {
+                setCoords(coords);
+                setError(null);
+            } else {
+                setError("City not found");
+            }
+        })
+        .catch((err) => {
+            console.error(err);
+            setError("Error fetching coordinates");
+        });
+    }, [input]);
+
+    if (!weather) return <p>Chargement...</p>
 
   return (
     <div className="weather-card">
+      <form onSubmit={handleSearch} className="weather-form">
+        <input
+            type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Rechercher un lieu"
+            className="weather-input"
+        />
+        <button type="submit" className="weather-button">
+            Rechercher
+        </button>
+      </form>
+
+      {error && <p className="weather-error">{error}</p>}
+
       <p>Temperature : {weather.current_weather.temperature}{weather.current_weather_units.temperature}</p>
       <p>Wind speed : {weather.current_weather.windspeed}{weather.current_weather_units.windspeed}</p>
       <p>Wind direction : {weather.current_weather.winddirection}{weather.current_weather_units.winddirection}</p>
