@@ -1,3 +1,13 @@
+# Canceled
+
+## Youtube search API
+
+### Description
+
+The API permissions changed mid project and now doesn't allow public access.  
+
+### Exemple
+
 curl https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCyMXuuk-eHgkLuaa6L95iMg&eventType=live&type=video&key=<key>:
 
 {

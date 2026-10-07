@@ -12,7 +12,7 @@ export default function Page() {
     <Dashboard
       youtubeLiveSlot={
         <Suspense fallback={<p>Loading YouTube Live...</p>}>
-          <YouTubeLive channelId="UCyMXuuk-eHgkLuaa6L95iMg" />
+          <YouTubeLive />
         </Suspense>
       }
       githubSlot={

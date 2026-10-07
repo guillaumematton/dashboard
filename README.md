@@ -21,19 +21,7 @@ JWT: Useful for the authentification page
 - clock
 - youtube
 - github
-- google maps (planned)
-
-## Frontend .env.local
-The frontend needs a .env.local to work formated as the .env.local.exemple in which you need to put in your youtube api key.  
-To get your youtube api key, you need to:  
-- go to [Google Cloud Console](https://console.cloud.google.com/)
-- create a new project
-- Go to "API et services"
-- Search "Youtube Data API v3"
-- Activate it
-- create API KEY
-- copy it in your .env.local file
-
+- google maps
 
 ## Github commits
 
@@ -90,19 +78,6 @@ https://api.github.com/repos/${repo.owner.login}/${repo.name}/commits?author=${u
 Repo owner is the user who owns the repo.  
 Repo name is the user who made the commit.  
 Limit is the number of commits you want to get.  
-
-### Youtube API
-
-Get the live:  
-https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&eventType=live&type=video&maxResults=1&order=date&key=${apiKey}  
-
-Channel id is the id of the channel you want to fetch from.  
-Event type is to say wether to fetch a live or videos.  
-Type is the format we want. Here we want the video so the type is video.  
-Max results is the number of results we want to get.  
-Order is the order of the results. Here we want the results sorted by date.  
-Key is the API key you get from the Google Cloud Console.  
-
 
 ### Google Maps API
 
