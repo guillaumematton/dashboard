@@ -23,6 +23,10 @@
     color: var(--ink);
 }
 
+.mrd-divider { display: flex; align-items: center; gap: 12px; margin: 16px 0; opacity: .6; font-size: .85rem; }
+.mrd-divider::before, .mrd-divider::after { content: ""; flex: 1; height: 1px; background: currentColor; opacity: .3; }
+.mrd-github { background: #24292f; }
+
 .mrd-brief {
     position: relative;
     flex: 1 1 46%;

@@ -49,8 +49,12 @@ export default function AuthPage({ onSubmit } = {}) {
     }
   }
 
+  function handleGithubLogin() {
+    window.location.href = `http://localhost:8080/api/v1/auth/github`;
+  }
+
   async function fetchLogin() {
-    fetch("http://localhost:5000/api/v1/login", {
+    fetch("http://localhost:8080/api/v1/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -180,6 +184,12 @@ export default function AuthPage({ onSubmit } = {}) {
 
           <button type="submit" className="mrd-submit" disabled={!canSubmit}>
             {status === "submitting" ? "Signing in…" : "Sign in"}
+          </button>
+
+          <div className="mrd-divider"><span>or</span></div>
+          
+          <button type="button" className="mrd-submit mrd-github" onClick={handleGithubLogin}>
+            Continue with GitHub
           </button>
         </form>
       </main>

@@ -61,6 +61,22 @@ JWT: Useful for the authentification page
 - github
 - google maps
 
+## Github environment variables
+
+The oauth needs a client id and a client secret:
+
+- Go to [github](https://github.com) and login if not
+- click on your profile picture
+- click on "Settings"
+- click on "Developer settings"
+- click on "OAuth app"
+- click on "New OAuth app"
+- give it a name
+- set the homepage as "http://localhost:3000"
+- set the callback URL as "http://localhost:8080/auth/github/callback"
+- click on "Add a new OAuth app"
+- copy your client id and client secret into the .env.local file
+
 ## Github commits
 
 This dashboard has a widget for github commits requiering the use of a fine-grained PAT.
