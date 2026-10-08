@@ -35,10 +35,11 @@
     color: var(--cream);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     padding: 3rem 3.25rem;
     box-sizing: border-box;
     overflow: hidden;
+    align-items: center
 }
 
 .mrd-mark {
@@ -172,11 +173,9 @@
 }
 
 .mrd-logo {
-    position: absolute;
-    top: 15rem;
-    right: 1.5rem;
     width: auto;
     height: auto;
+    max-width: 100%;
 }
 
 .mrd-toggle:hover {
