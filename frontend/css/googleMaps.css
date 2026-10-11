@@ -1,0 +1,50 @@
+.maps-widget {
+  --m-ink: #14181f;
+  --m-brass: #b08d57;
+  --m-cream: #f2efe7;
+  --m-line: rgba(242, 239, 231, 0.12);
+
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.maps-form {
+  display: flex;
+  gap: 6px;
+  padding: 0.5rem;
+  background: var(--m-ink);
+}
+
+.maps-input {
+  flex: 1;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.8rem;
+  font-family: inherit;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--m-line);
+  color: var(--m-cream);
+}
+
+.maps-input:focus {
+  outline: none;
+  border-color: var(--m-brass);
+}
+
+.maps-button {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: none;
+  background: var(--m-brass);
+  color: var(--m-ink);
+  cursor: pointer;
+}
+
+.maps-frame {
+  flex: 1;
+  width: 100%;
+  min-height: 160px;
+  border: none;
+}

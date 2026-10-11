@@ -1,47 +1,45 @@
-"use client";
+import { Suspense } from "react";
+import Dashboard from "../components/dashboard";
+import YouTubeLive from "../components/youtubeLive";
+import YoutubeVideo from "../components/youtubeVideo";
+import GithubActivity from "../components/githubActivity";
+import Weather from "../components/weather";
+import Clock from "../components/clock";
+import Maps from "../components/googleMaps";
 
-import { AuthProvider, AuthContext } from "react-oauth2-code-pkce";
-import { useState, useEffect, useContext } from "react";
-
-function AuthenticatedUser() {
-  const { token, login, logOut, tokenData } = useContext(AuthContext);
-
-  if (!token) {
-    return <button onClick={() => login()}>Log in with GitHub</button>;
-  }
-
+export default function Page() {
   return (
-    <div>
-      <p>Logged in!</p>
-      <button onClick={() => logOut()}>Log out</button>
-    </div>
-  );
-}
-
-export default function App() {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return null;
-  }
-
-  const authConfig = {
-    clientId: 'Ov23linRYUnTKdB5mtNX',
-    authorizationEndpoint: 'https://github.com/login/oauth/authorize',
-    tokenEndpoint: '/api/github',
-    redirectUri: window.location.origin,
-    scope: 'read:user user:email',
-    decodeToken: false,
-    loginMethod: 'popup',
-  };
-
-  return (
-    <AuthProvider authConfig={authConfig}>
-      <AuthenticatedUser />
-    </AuthProvider>
+    <Dashboard
+      youtubeLiveSlot={
+        <Suspense fallback={<p>Loading YouTube Live...</p>}>
+          <YouTubeLive />
+        </Suspense>
+      }
+      githubSlot={
+        <Suspense fallback={<p>Loading GitHub Activity...</p>}>
+          <GithubActivity/>
+        </Suspense>
+      }
+      weatherSlot={
+        <Suspense fallback={<p>Loading Weather...</p>}>
+          <Weather />
+        </Suspense>
+      }
+      clockSlot={
+        <Suspense fallback={<p>Loading Clock...</p>}>
+          <Clock />
+        </Suspense>
+      }
+      youtubeVideoSlot={
+        <Suspense fallback={<p>Loading Youtube Video Widget...</p>}>
+          <YoutubeVideo />
+        </Suspense>
+      }
+      mapsSlot={
+        <Suspense fallback={<p>Loading Google Maps...</p>}>
+          <Maps />
+        </Suspense>
+      }
+    />
   );
 }
