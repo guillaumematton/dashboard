@@ -156,6 +156,21 @@ app.post("/api/v1/verify", async (req, res) => {
   }
 });
 
+app.get("/about.json", async (req, res) => {
+  const callerIP = req.ip; 
+  const currentTime = Math.floor(Date.now() / 1000);
+
+  res.json({
+    client: {
+      host: callerIP,
+    },
+    server: {
+      currentTime: currentTime,
+      services: [],
+    }
+  });
+});
+
 app.listen(8080, () => {
   console.log("Server is running on port 8080");
 });
