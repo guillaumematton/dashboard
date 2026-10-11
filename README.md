@@ -2,6 +2,14 @@
 
 EPITECH project planned to be a usable dashboard tailored to our need.  
 
+## Use case
+
+You want to have the video game radio during work?  
+You want to be able to see your latest commits in case you forgot to push?  
+Or maybe just a video playing in the background while you check for your next stop on google maps or the current weather?  
+If you said yes to one of these question then this dashboard is for you.  
+Otherwise try it and see if it fits your needs (or fork it to customize it for yourself).  
+
 ## Installation
 
 This project requires docker and docker-compose to be installed:
@@ -32,6 +40,14 @@ sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin dock
 For other distros, check the official docker site:
 https://docs.docker.com/compose/install/linux/
 
+## Building the project (Skipable if you want to run directly)
+
+After completing both .env and frontend/.env.local, just run the following command:
+
+```bash
+docker-compose build
+```
+
 ## Launching project
 
 After completing both .env and frontend/.env.local, just run the following command:
@@ -49,12 +65,54 @@ docker-compose up
 
 [dashboard-stacks](frontend/public/dashboard-stacks.png "Dashboard Stacks")
 
+## Structure of the project
+
+This project is separated in three major folders
+
+### database
+
+The init.sql required to start the database.  
+Change it when you want to add or delete an entry in the database.  
+
+### backend
+
+The server linking the database to the frontend.  
+Add your endpoint in server.js or create custom functions in other files.  
+
+### frontend
+
+The frontend as multiple directory with different use-cases.  
+
+#### app
+
+This folder contains all the different pages as required by the react language.  
+
+#### components
+
+This folder regroups all components (mainly server side or client side widgets) to seperate them from the app folder that is already big as is.  
+
+#### css
+
+This folder regroups all css files for the app.  
+
+#### public
+
+Where all public assets are. Maily images for now.  
+
+## Services
+
+- timeapi
+- open-meteo
+- github
+- google maps
+- youtube (canceled direct call but videos are still availible. For more details check [canceled](./canceled.md))
 
 ## Widgets
 
 - weather
 - clock
-- youtube
+- youtube live
+- youtube video
 - github
 - google maps
 
