@@ -4,9 +4,9 @@ EPITECH project planned to be a usable dashboard tailored to our need.
 
 ## Use case
 
-You want to have the video game radio during work?  
-You want to be able to see your latest commits in case you forgot to push?  
-Or maybe just a video playing in the background while you check for your next stop on google maps or the current weather?  
+You want to have the video game radio during work ?  
+You want to be able to see your latest commits in case you forgot to push ?  
+Or maybe just a video playing in the background while you check for your next stop on google maps or the current weather ?  
 If you said yes to one of these question then this dashboard is for you.  
 Otherwise try it and see if it fits your needs (or fork it to customize it for yourself).  
 
